@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Herşeyime Balıma.</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      height: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') no-repeat center center;
+      background-size: cover;
+      filter: blur(60px);
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      color: #d81b60;
+      font-size: 2.5em;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 30px 0;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: block;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 900px;
+      height: 200px;
+      margin: 30px auto 0 auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: block;
+    }
+
+    /* Kayan yazılar stili */
+    .floating-text {
+      position: fixed;
+      top: 0;
+      font-weight: bold;
+      color: #d81b60cc;
+      font-size: 1.4em;
+      white-space: nowrap;
+      user-select: none;
+      text-shadow: 0 0 5px #d81b60dd;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 1000;
+      /* Başlangıç konumu ve animasyon için stil JS ile ayarlanacak */
+    }
+
+    @keyframes floatDiagonalRight {
+      0% {
+        transform: translate(0, -10vh);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50vw, 100vh);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatDiagonalLeft {
+      0% {
+        transform: translate(0, -10vh);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(50vw, 100vh);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <main>
+    <h1>Herşeyime Balıma 💗</h1>
+
+    <p>Bu sayfa, sana olan sevgimi kelimelere dökebilmek için yaptım.</p>
+    <p>Her anımda sen varsın. Gülüşün, sesin, varlığın… Hepsi içimi ısıtan bir güneş gibi.</p>
+    <p>Bu site, beraber geçirdiğimiz güzel anılardan birkaç tanesini bir araya getirdiğim küçük bir hatıra.</p>
+    <p>Hep yanımda ol, hep benimle kal... Seni çok seviyorum. Affet beni balım. 🥺</p>
+
+    <div class="gallery">
+      <img src="https://i.hizliresim.com/87uxom4.jpg" alt="seni" />
+      <img src="https://i.hizliresim.com/fa1d5ip.jpg" alt="Cok" />
+      <img src="https://i.hizliresim.com/mkso23h.jpg" alt="Seviyorum" />
+      <img src="https://i.hizliresim.com/bcxbjme.jpg" alt="Balım" />
+      <img src="https://i.hizliresim.com/63778ln.jpg" alt="Affet" />
+      <img src="https://i.hizliresim.com/5x6zmnu.jpg" alt="Beni." />
+    </div>
+
+    <iframe 
+      src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=0" 
+      title="lofi hip hop radio – beats to relax/study to" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
+  </main>
+
+  <script>
+    const texts = ["Seni seviyorum", "Balım", "Seni yerim", "Aşığım", "Aşkım"];
+    const body = document.body;
+
+    function createFloatingText() {
+      const text = texts[Math.floor(Math.random() * texts.length)];
+      const span = document.createElement("span");
+      span.classList.add("floating-text");
+      span.textContent = text;
+
+      // Sağdan mı soldan mı başlayacak rastgele belirle
+      const fromRight = Math.random() < 0.5;
+
+      if (fromRight) {
+        // Sağdan başla, sayfa sağından biraz dışarıda
+        span.style.right = '-100px';
+        span.style.left = 'auto';
+        // Animasyon floatDiagonalRight
+        const duration = Math.random() * 7 + 8; // 8-15 saniye arası
+        span.style.animation = `floatDiagonalRight ${duration}s linear forwards`;
+      } else {
+        // Soldan başla, sayfa solundan biraz dışarıda
+        span.style.left = '-100px';
+        span.style.right = 'auto';
+        // Animasyon floatDiagonalLeft
+        const duration = Math.random() * 7 + 8;
+        span.style.animation = `floatDiagonalLeft ${duration}s linear forwards`;
+      }
+
+      span.style.top = '0'; // Yukardan başla
+
+      body.appendChild(span);
+
+      span.addEventListener("animationend", () => {
+        span.remove();
+      });
+    }
+
+    setInterval(createFloatingText, 700);
+  </script>
+
+</body>
+</html>
